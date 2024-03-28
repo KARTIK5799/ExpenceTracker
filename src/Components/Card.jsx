@@ -2,16 +2,27 @@ import PropTypes from "prop-types";
 import "./Card.css";
 import PieChartSection from "./PieChartSection";
 import Button from "./Button.jsx";
+import { useExpenceData } from "../DataContext.jsx";
+
 
 const Card = ({ cardType }) => {
-  const regularExpenses = [
-    { name: "Credit Card", value: 200, image: "credit_card" },
-    { name: "Subscription", value: 50, image: "subscriptions" },
-    { name: "Monthly Food", value: 300, image: "fastfood" },
-    { name: "Travel Expense", value: 100, image: "two_wheeler" },
-    { name: "Rent", value: 1000, image: "apartment" },
-    { name: "Grocery", value: 200, image: "grocery" },
-  ];
+  const {
+    income,
+    regularExpenses,
+    resetIncome,
+    expensesData,
+    spent,
+    available,
+    addRegularBills,
+    deleteExpense,
+    addIncome,
+    updateExpense,
+  } = useExpenceData();
+
+
+
+
+
 
   switch (cardType) {
     case "calculation":
@@ -20,23 +31,23 @@ const Card = ({ cardType }) => {
           <h3>Calculation</h3>
 
           <div className="incomeWindow">
-            <h4>Income</h4>
-            <p>$300</p>
+            <h4>INCOME</h4>
+            <p>${income}</p>
           </div>
           <div className="piechart">
             <PieChartSection />
           </div>
           <div className="availbleFunds">
             <div className="spentFund">
-              <h4>Spent</h4>
-              <p>$300</p>
+              <h4>SPENT</h4>
+              {spent < income ? <p>${spent}</p>:<p>${income}</p>}
             </div>
             <div className="availbleFund">
-              <h4>Available</h4>
-              <p>$300</p>
+              <h4>AVAILABLE</h4>
+            { available<0 ? <p>$0</p>:<p>${available}</p>}
             </div>
           </div>
-          <Button TextContent={"Reset Expences"} />
+          <Button TextContent={"Add Income"} onClick={addIncome}/>
         </div>
       );
     case "options":
@@ -55,7 +66,14 @@ const Card = ({ cardType }) => {
                     </div>
                     <h4>{item.name}</h4>
                     <p>${item.value}</p>
-                    <span className="material-symbols-outlined actionButton">
+                   
+                    <span
+                      className="material-symbols-outlined actionButton"
+                      onClick={() => {
+                        addRegularBills(idx);
+                      
+                      }}
+                    >
                       add_circle
                     </span>
                   </div>
@@ -63,7 +81,7 @@ const Card = ({ cardType }) => {
               </div>
             </div>
           </div>
-          <Button TextContent={"Add Income"} />
+          <Button TextContent={"Reset Income"} onClick={resetIncome} />
         </div>
       );
     case "history":
@@ -73,144 +91,45 @@ const Card = ({ cardType }) => {
           <div className="optionbottom"></div>
         </div>
       );
-
     default:
       return (
         <div className="expencesCard expenceListcard card ">
           <h3>Your Expence</h3>
-          <div className="expenceListItems incomeWindow">
-            <div className="expenceListItemTitle">
-              <div className="itemcard">
-                <div className="itemImg">
-                  <span className="material-symbols-outlined">movie</span>
-                </div>
-                <h4>Movie</h4>
-                <p>$200</p>
-                <div className="actionButtonsList">
-                  <span className="material-symbols-outlined actionButton">
-                    edit
-                  </span>
-                  <span className="material-symbols-outlined actionButton">
-                    delete
-                  </span>
-                </div>
-              </div>
-              
-            </div>
-            
-          </div>
-          <div className="expenceListItems incomeWindow">
-            <div className="expenceListItemTitle">
-              <div className="itemcard">
-                <div className="itemImg">
-                  <span className="material-symbols-outlined">movie</span>
-                </div>
-                <h4>Movie</h4>
-                <p>$200</p>
-                <div className="actionButtonsList">
-                  <span className="material-symbols-outlined actionButton">
-                    edit
-                  </span>
-                  <span className="material-symbols-outlined actionButton">
-                    delete
-                  </span>
+          {expensesData &&
+            expensesData.map((item, idx) => (
+              <div key={idx} className="expenceListItems incomeWindow">
+                <div className="expenceListItemTitle">
+                  <div className="itemcard">
+                    <div className="itemImg">
+                      <span className="material-symbols-outlined">
+                        {item.image}
+                      </span>
+                    </div>
+                    <h4>{item.name}</h4>
+                    <p>${item.value}</p>
+                    <div className="actionButtonsList">
+                      <span className="material-symbols-outlined actionButton" onClick={()=>{
+                        updateExpense(idx)
+                      }}>
+                        edit
+                      </span>
+                      <span className="material-symbols-outlined actionButton" onClick={()=>{
+                        deleteExpense(idx);
+                      }}>
+                        delete
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              
-            </div>
-            
-          </div>
-          <div className="expenceListItems incomeWindow">
-            <div className="expenceListItemTitle">
-              <div className="itemcard">
-                <div className="itemImg">
-                  <span className="material-symbols-outlined">movie</span>
-                </div>
-                <h4>Movie</h4>
-                <p>$200</p>
-                <div className="actionButtonsList">
-                  <span className="material-symbols-outlined actionButton">
-                    edit
-                  </span>
-                  <span className="material-symbols-outlined actionButton">
-                    delete
-                  </span>
-                </div>
-              </div>
-              
-            </div>
-            
-          </div>
-          <div className="expenceListItems incomeWindow">
-            <div className="expenceListItemTitle">
-              <div className="itemcard">
-                <div className="itemImg">
-                  <span className="material-symbols-outlined">movie</span>
-                </div>
-                <h4>Movie</h4>
-                <p>$200</p>
-                <div className="actionButtonsList">
-                  <span className="material-symbols-outlined actionButton">
-                    edit
-                  </span>
-                  <span className="material-symbols-outlined actionButton">
-                    delete
-                  </span>
-                </div>
-              </div>
-              
-            </div>
-            
-          </div>
-
-          <div className="expenceListItems incomeWindow">
-            <div className="expenceListItemTitle">
-              <div className="itemcard">
-                <div className="itemImg">
-                  <span className="material-symbols-outlined">movie</span>
-                </div>
-                <h4>Movie</h4>
-                <p>$200</p>
-                <div className="actionButtonsList">
-                  <span className="material-symbols-outlined actionButton">
-                    edit
-                  </span>
-                  <span className="material-symbols-outlined actionButton">
-                    delete
-                  </span>
-                </div>
-              </div>
-              
-            </div>
-            
-          </div>
-          <div className="expenceListItems incomeWindow">
-            <div className="expenceListItemTitle">
-              <div className="itemcard">
-                <div className="itemImg">
-                  <span className="material-symbols-outlined">movie</span>
-                </div>
-                <h4>Movie</h4>
-                <p>$200</p>
-                <div className="actionButtonsList">
-                  <span className="material-symbols-outlined actionButton">
-                    edit
-                  </span>
-                  <span className="material-symbols-outlined actionButton">
-                    delete
-                  </span>
-                </div>
-              </div>
-              
-            </div>
-            
-          </div>
+            ))}
         </div>
       );
   }
 };
+
 Card.propTypes = {
-  cardType: PropTypes.bool.isRequired,
+  cardType: PropTypes.string.isRequired,
 };
 
 export default Card;

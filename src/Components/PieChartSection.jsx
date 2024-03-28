@@ -1,13 +1,8 @@
 
 import { PieChart, Pie, Cell } from "recharts";
+import { useExpenceData } from "../DataContext";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group C", value: 300 },
 
-];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -39,10 +34,11 @@ const renderCustomizedLabel = ({
 };
 
 const PieChartSection = () => {
+  const {pieData,income}=useExpenceData();
   return (
     <PieChart width={400} height={400}  >
       <Pie
-        data={data}
+        data={pieData}
         cx={200}
         cy={100}
         labelLine={false}
@@ -52,7 +48,7 @@ const PieChartSection = () => {
         dataKey="value"
         style={{ outline: "none" }}
       >
-        {data.map((entry, index) => (
+        {pieData.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}  style={{ outline: "none" }} />
         ))}
       </Pie>
