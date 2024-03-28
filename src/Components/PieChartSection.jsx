@@ -34,9 +34,9 @@ const renderCustomizedLabel = ({
 };
 
 const PieChartSection = () => {
-  const {pieData,income}=useExpenceData();
+  const {pieData}=useExpenceData();
   return (
-    <PieChart width={400} height={400}  >
+    <PieChart width={400} height={400}  style={{zIndex:0}}>
       <Pie
         data={pieData}
         cx={200}

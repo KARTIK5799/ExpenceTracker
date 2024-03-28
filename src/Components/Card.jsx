@@ -1,9 +1,10 @@
-import PropTypes from "prop-types";
-import "./Card.css";
-import PieChartSection from "./PieChartSection";
-import Button from "./Button.jsx";
-import { useExpenceData } from "../DataContext.jsx";
-
+import React from 'react';
+import PropTypes from 'prop-types';
+import './Card.css';
+import PieChartSection from './PieChartSection';
+import Modal from './Modal.jsx';
+import Button from './Button.jsx';
+import { useExpenceData } from '../DataContext.jsx';
 
 const Card = ({ cardType }) => {
   const {
@@ -19,13 +20,18 @@ const Card = ({ cardType }) => {
     updateExpense,
   } = useExpenceData();
 
+  const [open, setOpen] = React.useState(false);
 
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-
-
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   switch (cardType) {
-    case "calculation":
+    case 'calculation':
       return (
         <div className="calculationCard card">
           <h3>Calculation</h3>
@@ -40,17 +46,26 @@ const Card = ({ cardType }) => {
           <div className="availbleFunds">
             <div className="spentFund">
               <h4>SPENT</h4>
-              {spent < income ? <p>${spent}</p>:<p>${income}</p>}
+              {spent < income ? <p>${spent}</p> : <p>${income}</p>}
             </div>
             <div className="availbleFund">
               <h4>AVAILABLE</h4>
-            { available<0 ? <p>$0</p>:<p>${available}</p>}
+              {available < 0 ? <p>$0</p> : <p>${available}</p>}
             </div>
           </div>
-          <Button TextContent={"Add Income"} onClick={addIncome}/>
+          <Button TextContent={'Add Income'} onClick={()=>{
+            addIncome();
+            handleOpen();
+          }} />
+          <Modal isOpen={open} onClose={handleClose}>
+            <>
+              <h1>Add Income </h1>
+              <h3>2220</h3>
+            </>
+          </Modal>
         </div>
       );
-    case "options":
+    case 'options':
       return (
         <div className="optionsCard card">
           <h3>Regular Bills</h3>
@@ -60,18 +75,15 @@ const Card = ({ cardType }) => {
                 {regularExpenses.map((item, idx) => (
                   <div className="itemcard" key={idx}>
                     <div className="itemImg">
-                      <span className="material-symbols-outlined">
-                        {item.image}
-                      </span>
+                      <span className="material-symbols-outlined">{item.image}</span>
                     </div>
                     <h4>{item.name}</h4>
                     <p>${item.value}</p>
-                   
+
                     <span
                       className="material-symbols-outlined actionButton"
                       onClick={() => {
                         addRegularBills(idx);
-                      
                       }}
                     >
                       add_circle
@@ -81,10 +93,11 @@ const Card = ({ cardType }) => {
               </div>
             </div>
           </div>
-          <Button TextContent={"Reset Income"} onClick={resetIncome} />
+          <Button TextContent={'Reset Income'} onClick={resetIncome} />
+          
         </div>
       );
-    case "history":
+    case 'history':
       return (
         <div className="optionsCard card">
           <h3>History</h3>
@@ -94,28 +107,33 @@ const Card = ({ cardType }) => {
     default:
       return (
         <div className="expencesCard expenceListcard card ">
-          <h3>Your Expence</h3>
+          <h3>Your Expense</h3>
           {expensesData &&
             expensesData.map((item, idx) => (
               <div key={idx} className="expenceListItems incomeWindow">
                 <div className="expenceListItemTitle">
                   <div className="itemcard">
                     <div className="itemImg">
-                      <span className="material-symbols-outlined">
-                        {item.image}
-                      </span>
+                      <span className="material-symbols-outlined">{item.image}</span>
                     </div>
                     <h4>{item.name}</h4>
                     <p>${item.value}</p>
                     <div className="actionButtonsList">
-                      <span className="material-symbols-outlined actionButton" onClick={()=>{
-                        updateExpense(idx)
-                      }}>
+                      <span
+                        className="material-symbols-outlined actionButton"
+                        onClick={() => {
+                          updateExpense(idx);
+                          handleOpen();
+                        }}
+                      >
                         edit
                       </span>
-                      <span className="material-symbols-outlined actionButton" onClick={()=>{
-                        deleteExpense(idx);
-                      }}>
+                      <span
+                        className="material-symbols-outlined actionButton"
+                        onClick={() => {
+                          deleteExpense(idx);
+                        }}
+                      >
                         delete
                       </span>
                     </div>
@@ -123,6 +141,12 @@ const Card = ({ cardType }) => {
                 </div>
               </div>
             ))}
+          <Modal isOpen={open} onClose={handleClose}>
+            <>
+              <h1>Edit </h1>
+              <h3>the data</h3>
+            </>
+          </Modal>
         </div>
       );
   }
