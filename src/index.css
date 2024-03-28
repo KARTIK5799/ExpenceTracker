@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  background-color: #2B2B2B;
+  font-family: "Roboto", sans-serif;
+  overflow-y: hidden;
+}
+
+:root {
+  --primarytext-color: #FFFDE7;
+  --secondarytext-color: #51D289;
+  --yellowhighlight-color:#FFE600;
+}

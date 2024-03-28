@@ -1,0 +1,125 @@
+.card{
+    width: 352px;
+    max-height: 645px;
+    background: #FBFBFB;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    padding: 1.5rem;
+    border-radius: 4px;
+    color: #2B2B2B;
+    margin: 10px;
+    overflow-y: scroll;
+   
+gap: 1rem;
+}
+.card::-webkit-scrollbar {
+    display: none;
+}
+.expenceListcard{
+    width: 550px;
+  margin-top: -3px;
+  margin-left: -30px;
+    height: 100%;
+}
+
+.card h3{
+    width: 100%;
+    font-size: 30px;
+    font-weight: 300;
+    border-bottom: 1px dotted #2B2B2B;
+    text-align: center;
+    padding: 0 0 1rem 0;
+}
+.incomeWindow{
+    padding: 0.2rem;
+width: 100%;
+background: var(--primarytext-color);
+text-align: center;
+height: auto;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+.incomeWindow p{
+font-size: 40px;
+font-weight: 300;
+}
+.availbleFunds{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    margin-top: -130px;
+    padding-bottom: 1rem;
+    border-bottom: 1px dotted #2B2B2B;
+
+}
+.spentFund,.availbleFund{
+    background: #000;
+    color: var(--primarytext-color);
+    height: 70px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+.spentFund p{
+    color: var(--yellowhighlight-color);
+    font-size: 30px;
+}
+.availbleFund p{
+    color: var(--secondarytext-color);
+    font-size: 30px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.itemcard{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:0 0.5rem ;
+  
+}
+.itemImg{
+   margin: 12.5px;
+    background: var(--secondarytext-color);
+    padding: 10px;
+    border-radius: 100%;
+    color: var(--primarytext-color);
+}
+.itemcard p{
+font-size: 20px;
+}
+.optionbottom{
+    width: 100%;
+    border-bottom: 1px dotted #2B2B2B;
+    padding-bottom: 1rem;
+}
+.actionButtonsList{
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+.actionButton{
+cursor: pointer;
+}
+.actionButton:hover{
+    color: #c32121;
+}
+.expenceListItems{
+    margin: 0.3rem 0;
+    border-radius: 4px;
+}

@@ -1,0 +1,31 @@
+nav{
+    border-bottom: 1px solid #FFE600;
+    height: 53px;
+    padding-bottom: 5rem;
+ 
+  
+}
+.sectionNav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.logoTitle{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+.logoTitle img{
+    height: 44px;
+}
+.logoTitle p{
+    color:   var(--yellowhighlight-color);
+}
+.logoTitle h1{
+    color:   var(--primarytext-color);
+    font-size: 40px;
+}
+.logoTitle span{
+    color:   var(--secondarytext-color);
+}
