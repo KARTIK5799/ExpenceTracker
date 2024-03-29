@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 
 const ExpenceDataContext = createContext();
 
+
+
+
 export const ExpenceDataProvider = ({ children }) => {
- 
   const [regularExpenses, setRegularExpenses] = useState([
     {
       name: "Credit Card",
@@ -30,7 +32,7 @@ export const ExpenceDataProvider = ({ children }) => {
   ]);
 
   const [expensesData, setExpensesData] = useState([
-    { name: "Grocery", value: 200, image: "grocery", category: "Food" },
+   
   ]);
 
   const pieData = [
@@ -41,7 +43,7 @@ export const ExpenceDataProvider = ({ children }) => {
     { name: "Group C", value: 600 },
   ];
 
-  const [income, setIncome] = useState(1200);
+  const [income, setIncome] = useState(0);
   const spent = expensesData.reduce(
     (total, expence) => total + expence.value,
     0
@@ -70,31 +72,31 @@ export const ExpenceDataProvider = ({ children }) => {
     }
   };
 
-  const deleteExpense=(idx)=>{
-    const updatedExpenceList=expensesData.filter((expence,index)=>index !== idx);
-   setExpensesData(updatedExpenceList);
-  }
+  const deleteExpense = (idx) => {
+    const updatedExpenceList = expensesData.filter(
+      (expence, index) => index !== idx
+    );
+    setExpensesData(updatedExpenceList);
+  };
 
-  const updateExpense = (idx) => {
+  const updateExpense = (idx,name,value) => {
     const updatedExpenseList = [...expensesData];
     if (idx >= 0 && idx < expensesData.length) {
-     
       if (!regularExpenses.includes(expensesData[idx])) {
         updatedExpenseList[idx] = {
           ...updatedExpenseList[idx],
-          name: 'kartik',
-          value: 555,
+          name: name,
+          value: value,
         };
         setExpensesData(updatedExpenseList);
       } else {
-       
         alert("Cannot edit regular expenses.");
       }
     } else {
       console.log("Invalid expense index.");
     }
   };
-  
+
 
 
   return (
@@ -111,7 +113,9 @@ export const ExpenceDataProvider = ({ children }) => {
         addRegularBills,
         deleteExpense,
         addIncome,
-        updateExpense
+        updateExpense,
+        setExpensesData,
+        
       }}
     >
       {children}
@@ -122,3 +126,4 @@ ExpenceDataProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 export const useExpenceData = () => useContext(ExpenceDataContext);
+export default ExpenceDataContext;

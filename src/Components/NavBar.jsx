@@ -3,6 +3,7 @@ import dollorsign from "../assets/dollorsign.svg";
 import Button from "./Button.jsx";
 import "./NavBar.css";
 import Modal from "./Modal.jsx";
+import Form from "./Form.jsx";
 
 const NavBar = () => {
   const [open, setOpen] = React.useState(false);
@@ -34,8 +35,7 @@ const NavBar = () => {
 
       <Modal isOpen={open} onClose={handleClose}>
             <>
-              <h1>Add Expence </h1>
-              <h3>add now</h3>
+            <Form addExpenseModal={true} handleCloseModal={handleClose}/>
             </>
           </Modal>
     </nav>

@@ -2,14 +2,21 @@ import { useState } from "react";
 import Card from "./Card";
 import "./ListExpences.css";
 import Button from "./Button";
+import { useExpenceData } from '../DataContext.jsx';
 
 const ListExpences = () => {
-  const [isListPresent, setIsListPresent] = useState(true);
+
+  const {
+   
+    expensesData,
+   
+  
+  } = useExpenceData();
 
   return (
     <div className="listItems">
       <div className="listSection">
-        {!isListPresent ? (
+        {expensesData.length === 0 ? (
           <div className="emptyArea">
             <div className="expenceTitle">
             <h2>
@@ -23,7 +30,7 @@ const ListExpences = () => {
             </div>
             <div className="addSection">
               <span className="material-symbols-outlined">shopping_cart</span>
-              <Button TextContent={"Add Expence"}  widthSize={"300px"} />
+              
             </div>
           </div>
         ) : (

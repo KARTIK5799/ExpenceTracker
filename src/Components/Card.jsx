@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Card.css';
 import PieChartSection from './PieChartSection';
 import Modal from './Modal.jsx';
 import Button from './Button.jsx';
 import { useExpenceData } from '../DataContext.jsx';
+import Form from './Form.jsx';
+
 
 const Card = ({ cardType }) => {
   const {
@@ -16,10 +18,11 @@ const Card = ({ cardType }) => {
     available,
     addRegularBills,
     deleteExpense,
-    addIncome,
-    updateExpense,
+  
   } = useExpenceData();
 
+  const[valIndex,setValIndex]=useState();
+  console.log(valIndex)
   const [open, setOpen] = React.useState(false);
 
   const handleClose = () => {
@@ -54,13 +57,12 @@ const Card = ({ cardType }) => {
             </div>
           </div>
           <Button TextContent={'Add Income'} onClick={()=>{
-            addIncome();
+            
             handleOpen();
           }} />
           <Modal isOpen={open} onClose={handleClose}>
             <>
-              <h1>Add Income </h1>
-              <h3>2220</h3>
+            <Form addIncomeModal={true} handleCloseModal={handleClose}/>
             </>
           </Modal>
         </div>
@@ -122,7 +124,7 @@ const Card = ({ cardType }) => {
                       <span
                         className="material-symbols-outlined actionButton"
                         onClick={() => {
-                          updateExpense(idx);
+                         setValIndex(idx)
                           handleOpen();
                         }}
                       >
@@ -143,8 +145,7 @@ const Card = ({ cardType }) => {
             ))}
           <Modal isOpen={open} onClose={handleClose}>
             <>
-              <h1>Edit </h1>
-              <h3>the data</h3>
+            <Form editExpenseModal={true} handleCloseModal={handleClose} valIndex={valIndex}/>
             </>
           </Modal>
         </div>
