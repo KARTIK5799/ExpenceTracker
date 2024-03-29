@@ -9,7 +9,7 @@ const Form = ({
   handleCloseModal,
   valIndex,
 }) => {
-  const { setIncome, expensesData,setExpensesData,updateExpense } = useExpenceData();
+  const { setIncome, expensesData,setExpensesData,updateExpense, income } = useExpenceData();
   
 
 
@@ -41,15 +41,19 @@ const Form = ({
       default:
         break;
     }
-  
+{  
+   if(income===0){
+    alert("add income First")
+   }else{
     const updatedExpensesData = [
       ...expensesData,
       { name, value, image, category }
     ];
   
     setExpensesData(updatedExpensesData);
-  
-    console.log(expensesData);
+   }
+  }
+    
   
     handleCloseModal();
   };
