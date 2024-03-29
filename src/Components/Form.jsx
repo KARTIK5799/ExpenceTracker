@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import "./Form.css";
 import { useExpenceData } from "../DataContext.jsx";
-import { useState } from "react";
 
 const Form = ({
   addExpenseModal,
@@ -13,7 +12,6 @@ const Form = ({
   const { setIncome, expensesData,setExpensesData,updateExpense } = useExpenceData();
   
 
- const [addedExpence,setAddedExpence]=useState({});
 
 
 
@@ -153,6 +151,7 @@ Form.propTypes = {
   editExpenseModal: PropTypes.bool.isRequired,
   addIncomeModal: PropTypes.bool.isRequired,
   handleCloseModal: PropTypes.func.isRequired,
+  valIndex: PropTypes.number.isRequired,
 };
 
 export default Form;
